@@ -1,4 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  Post,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { FreezePipe } from './pipes/freeze.pipe';
 
@@ -9,6 +15,11 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('error')
+  throwError() {
+    throw new InternalServerErrorException();
   }
 
   @Post()
